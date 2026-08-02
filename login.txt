@@ -1,4 +1,4 @@
-Login feature initial code
-Added validation
-A commit from main branch before merging feature-signup branch in main
-task-2-point1: A commit from main branch 
+> Login feature initial code
+- Added validation
+- A commit from main branch before merging feature-signup branch in main
+- Task-2-point1: A commit from main branch 

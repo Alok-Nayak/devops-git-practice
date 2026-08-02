@@ -1,1 +1,2 @@
 signup feature
+	- This feature let users sign up to use the application.
