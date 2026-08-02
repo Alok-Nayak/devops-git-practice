@@ -1,1 +1,2 @@
 This is a message from feature-settings branch, created this settings.txt in this branch
+dark mode option
