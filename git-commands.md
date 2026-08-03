@@ -11,62 +11,90 @@
 git config --global --unset user.name  
 git config --global --unset user.email
 ```
-## Basic Workflow
 
-- ` git status `   -Check git status
-- ` git add <file> ` -Add file to staging area.
-- ` git add . `  - Add everything in working directory to staging area.
-- ` git commit -m "message" ` - Adding the commit message.
-- ` git push `  - Pushing commits to github repo.
-- ` git pull `  - Pulling changes from git hub.
+---
 
-## Viewing Changes
+## 1. Basic Workflow
 
-- ` git log ` - Show's commit history
-- ` git diff ` - Show's unstaged changes(working vs staging).
-- ` git diff --staged ` -Shows staged changes(staging vs last commit).
-- ` git show <commitid> ` - Shows details of a specific commit.
+- `git status` — Check the status of working directory and staging area.
+- `git add <file>` — Add a specific file to the staging area.
+- `git add .` — Add all new, modified, and deleted files to the staging area.
+- `git commit -m "message"` — Record staged changes to the repository history.
+- `git push origin <branch-name>` — Upload local branch commits to remote repository (e.g., GitHub).
+- `git pull` — Fetch and merge changes from remote repository to local branch.
 
-## Git Advance Commands
+---
 
-### Branching & Switching
+## 2. Viewing Changes & History
 
-- ` git branch `                    - List local branches
-- ` git branch -r `                 - List remote branches
-- ` git branch -a  `                - List all branches
-- ` git branch <branch-name> `      - Create branch
-- ` git checkout <branch-name> `    - Switch branch
-- ` git checkout -b <branch-name> ` - Create + switch branch
-- ` git branch -d <branch-name> `            - Delete local branch (safe)
-- ` git branch -D <branch-name> `            - Delete local branch (force)
-- ` git push origin --delete <branch-name> ` - Delete remote branch
-- ` git push <remote-name> :<branch-name> `    - Delete remote branch
+- `git log` — Show complete commit history.
+- `git log --oneline` — Display compact, single-line commit history.
+- `git log --oneline --graph --all` — Display visual ASCII graph of all branches and commits.
+- `git diff` — Show unstaged changes (working directory vs. staging area).
+- `git diff --staged` — Show staged changes (staging area vs. last commit).
+- `git diff <branch> -- <filepath>` — Compare local file with its version on another branch.
+- `git show <commit-id>` — Display detailed changes made in a specific commit.
+- `git show <branch>:<filepath>` — View content of a file on another branch without switching.
 
-### New Commands
+---
 
-- ` git switch <branch-name> `      - Switch branch
-- ` git switch -c <branch-name> `   - Create + switch
-- ` git branch -M main `            - Rename current branch
+## 3. Branching & Switching
 
-### Merging & Rebaseing
+### Legacy Commands
+- `git branch` — List all local branches (`*` indicates active branch).
+- `git branch -r` — List all remote-tracking branches.
+- `git branch -a` — List all local and remote branches.
+- `git branch <branch-name>` — Create a new branch.
+- `git checkout <branch-name>` — Switch to an existing branch.
+- `git checkout -b <branch-name>` — Create and switch to a new branch in one command.
 
-- ` git merge branch-name `         - Merge branch into current.
-- ` git rebase branch-name `        - Reapply commits on top of another branch.
-- ` git pull --rebase `             - Pull with rebase instead of merge.
-- ` git cherry-pick <commit-id> `   - Apply a single commit from another branch.
+---
 
-### Srash & Restore
+### Recommended Modern Commands
+- `git switch <branch-name>` — Switch to an existing branch.
+- `git switch -c <branch-name>` — Create and switch to a new branch.
+- `git branch -M main` — Rename current branch to `main`.
 
-- ` git stash `     - saves tracked changes.
-git stash -u saves tracked + untracked changes
-git stash apply        # Restore last stash without removing it
-git stash list         # List all stashes
-git stash apply        # Restore last stash without removing it
-git stash list         # List all stashes
+---
 
-### Inspection and clean
+### Branch Deletion
+- `git branch -d <branch-name>` — Delete a local branch safely (prevents deletion if unmerged).
+- `git branch -D <branch-name>` — Force delete a local branch regardless of merge status.
+- `git push origin --delete <branch-name>` — Delete a branch from remote repository.
 
-- ` git reflog `            - Show all HEAD movements.
-- ` git clean -fd `         - Remove untracked files/folders.
-- ` git blame <file> `      - See who changed each line.
-    
+---
+
+## 4. Merging & Rebasing
+
+- `git merge <branch-name>` — Perform regular 3-way merge (preserves full commit history).
+- `git merge --squash <branch-name>` — Combine all branch commits into staged changes on target branch (requires `git commit` after).
+- `git rebase <branch-name>` — Replay current branch commits on top of another branch (linear history).
+- `git pull --rebase` — Fetch remote changes and rebase local commits on top instead of merging.
+- `git cherry-pick <commit-id>` — Apply a single, specific commit from another branch onto current branch.
+- `git rebase --continue` — Resume rebase process after resolving merge conflicts.
+- `git rebase --abort` — Cancel rebase and restore branch to original state.
+
+---
+
+## 5. Stash (Temporary Uncommitted Work)
+
+- `git stash` — Save modified, tracked changes to stash stack and clear working directory.
+- `git stash push -m "message"` — Save stash with a custom descriptive note.
+- `git stash -u` — Stash tracked AND untracked files.
+- `git stash list` — List all stored stashes (`stash@{0}`, `stash@{1}`, etc.).
+- `git stash pop` — Apply most recent stash and delete it from stash list.
+- `git stash apply stash@{N}` — Apply a specific stash index while keeping it in stash list.
+- `git stash drop stash@{N}` — Remove a specific stash entry from stash list.
+- `git stash clear` — Danger: Delete all stashes permanently.
+
+---
+
+## 6. Inspection, Cleanup & Recovery
+
+- `git reflog` — Show history of all HEAD reference movements (useful for recovering lost commits or branches).
+- `git clean -fd` — Force removal of all untracked files (`-f`) and directories (`-d`).
+- `git blame <file>` — Display line-by-line file history showing author and commit details.
+- `git restore <file>` — Discard local uncommitted changes in working directory.
+- `git restore --staged <file>` — Unstage a file while preserving changes in working directory.
+
+---
