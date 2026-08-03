@@ -2,3 +2,4 @@
 - Added validation
 - A commit from main branch before merging feature-signup branch in main
 - Task-2-point1: A commit from main branch 
+Stash item 2: updating login on main
